@@ -8,57 +8,128 @@ import java.util.Iterator;
 public class VirtualPetShelter {
     HashMap<String, VirtualPet> myPets = new HashMap<>();
 
-    /*public void printPets() {
-        for (VirtualPet pet: myPets){
-
-        }
+    public VirtualPetShelter() {
+        myPets.put("Javon", new OrganicDog("Javon", "our organic dog:"));
+        myPets.put("Diego", new RoboticDog("Diego", "our robotic dog:"));
+        myPets.put("Sammy", new OrganicCat("Sammy", "our organic cat:"));
+        myPets.put("Maria", new RoboticCat("Maria", "our robotic cat:"));
     }
- /*       Iterator<VirtualPet> it = myPets.iterator();
-        while (true){
-            if (myPets instanceof OrganicDog) {
-                System.out.println("");
-                VirtualPet pet1 = it.next();
-                System.out.println(pet1.name + pet1.description + pet1.getHunger() + pet1.getThirst() + pet1.get);
-            }
-        VirtualPet pet2 = it.next();
-        System.out.println(pet2.name + pet2.description);
-        VirtualPet pet3 = it.next();
-        System.out.println(pet3.name + pet3.description);
-        VirtualPet pet4 = it.next();
-        System.out.println(pet4.name + pet4.description);
-   */
 
-    public Collection<VirtualPet> retrieveAllPets() {
+    public HashMap<String, VirtualPet> retrieveAllPets() {
         return myPets;
     }
-    public void admitPet(VirtualPet pet){
+
+    public void printAllPets() {
+        for (VirtualPet pet : myPets.values()) {
+            if (pet instanceof OrganicDog) {
+                System.out.println("                      Hunger   Thirst Boredom Health Happiness CgFilth");
+                System.out.println(pet.getName() + pet.getDescription() + "|      " + ((OrganicDog) pet).getHunger() + "|      " + ((OrganicDog) pet).getThirst() + "|      " + pet.getBoredom() + "|     " + pet.getHealth() + "|     " + pet.getHappiness() + "|     " + ((OrganicDog) pet).getCageFilth());
+            } else if (pet instanceof OrganicCat) {
+                System.out.println("                      Hunger   Thirst Boredom Health Happiness");
+                System.out.println(pet.getName() + pet.getDescription() + "|      " + ((OrganicCat) pet).getHunger() + "|      " + ((OrganicCat) pet).getThirst() + "|      " + pet.getBoredom() + "|     " + pet.getHealth() + "|     " + pet.getHappiness());
+            } else if (pet instanceof RoboticDog) {
+                System.out.println("                      Oil     Maint   Boredom Health Happiness");
+                System.out.println(pet.getName() + pet.getDescription() + "|      " + ((RoboticDog) pet).getOilLevel() + "|      " + ((RoboticDog) pet).getMaintenance() + "|      " + pet.getBoredom() + "|     " + pet.getHealth() + "|     " + pet.getHappiness());
+            } else if (pet instanceof RoboticCat) {
+                System.out.println("                      Oil     Maint   Boredom Health Happiness");
+                System.out.println(pet.getName() + pet.getDescription() + "|      " + ((RoboticCat) pet).getOilLevel() + "|      " + ((RoboticCat) pet).getMaintenance() + "|      " + pet.getBoredom() + "|     " + pet.getHealth() + "|     " + pet.getHappiness());
+            }
+        }
+    }
+
+    public void admitPet(VirtualPet pet) {
         myPets.put(pet.getName(), pet);
     }
 
-    public void removePet(VirtualPet name) {
-        for (VirtualPet pet : myPets) {
-            if (pet.getName().equals(name)){
-                myPets.remove(pet);
-            }
-        }
+    public void removePet(String name) {
+        myPets.remove(name);
+
+
     }
+
     public void feedPets() {
-        for (VirtualPet pet: myPets){
-            pet.feedPets();
-        }
-    }
-    public void waterPets(){
-        for (VirtualPet pet: myPets){
-            pet.waterPets();
-        }
-    }
-    public void playWithPet(String name) {
-        for (VirtualPet pet : myPets) {
-            if (pet.getName().equals(name)) {
-                pet.playWithPet();
+        for (VirtualPet pet : myPets.values()) {
+            if (pet instanceof OrganicDog) {
+                ((OrganicDog) pet).feedPets();
+            } else if (pet instanceof OrganicCat) {
+                ((OrganicCat) pet).feedPets();
             }
         }
     }
 
+    public void waterPets() {
+        for (VirtualPet pet : myPets.values()) {
+            if (pet instanceof OrganicDog) {
+                ((OrganicDog) pet).waterPets();
+            } else if (pet instanceof OrganicCat) {
+                ((OrganicCat) pet).waterPets();
+            }
+        }
     }
+
+    public void oilPets() {
+        for (VirtualPet pet : myPets.values()) {
+            if (pet instanceof RoboticDog) {
+                ((RoboticDog) pet).oilPets();
+            } else if (pet instanceof RoboticCat) {
+                ((RoboticCat) pet).oilPets();
+            }
+        }
+    }
+
+    public void letCatOut() {
+        for (VirtualPet pet : myPets.values()) {
+            if (pet instanceof OrganicCat) {
+                ((OrganicCat) pet).letCatOut();
+            }
+        }
+    }
+
+    public void performMaintenance() {
+        for (VirtualPet pet : myPets.values()) {
+            if (pet instanceof RoboticDog) {
+                ((RoboticDog) pet).performMaintenance();
+            } else if (pet instanceof RoboticCat) {
+                ((RoboticCat) pet).performMaintenance();
+            }
+        }
+    }
+
+    public void walkDog() {
+        for (VirtualPet pet : myPets.values()) {
+            if (pet instanceof OrganicDog) {
+                ((OrganicDog) pet).walkDog();
+            }
+        }
+    }
+
+    public void cleanDogCage() {
+        for (VirtualPet pet : myPets.values()) {
+            if (pet instanceof OrganicDog) {
+                ((OrganicDog) pet).cleanDogCage();
+            }
+        }
+    }
+
+    public void playWithPet(String name) {
+        myPets.get(name).playWithPet();
+    }
+
+    public void tick() {
+        for (VirtualPet pet : myPets.values()) {
+            if (pet instanceof RoboticDog) {
+                ((RoboticDog) pet).tick();
+            } else if (pet instanceof RoboticCat) {
+                ((RoboticCat) pet).tick();
+            } else if (pet instanceof OrganicCat) {
+                ((OrganicCat) pet).tick();
+            } else if (pet instanceof OrganicDog) {
+                ((OrganicDog) pet).dogTick();
+            }
+        }
+    }
+}
+
+
+
 

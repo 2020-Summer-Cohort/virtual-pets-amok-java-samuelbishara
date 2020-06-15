@@ -1,6 +1,6 @@
 package pets_amok;
 
-public abstract class Robotic extends VirtualPet {
+public class Robotic extends VirtualPet {
     public Robotic(String name, String description) {
         super(name, description);
         this.oilLevel = 5;
@@ -17,9 +17,23 @@ public abstract class Robotic extends VirtualPet {
         return maintenance;
     }
     public void oilPets(){
-        oilLevel += 3;
+        oilLevel += 4;
+        happiness += 3;
+        health += 3;
     }
     public void performMaintenance(){
-        maintenance += 3;
+        maintenance += 4;
+        happiness += 3;
+        health += 3;
+
+    }
+    // tick method negatively impacts pet attributes which in turn lowers health and happiness
+    // other methods (i.e feedPets) positively impact pet attributes which increases health and happiness
+    public void tick(){
+        oilLevel --;
+        maintenance --;
+        happiness --;
+        health --;
+        boredom ++;
     }
 }

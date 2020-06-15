@@ -1,11 +1,11 @@
 package pets_amok;
 
-public abstract class VirtualPet {
+public class VirtualPet {
     protected String name;
     protected String description;
     protected int health;
     protected int happiness;
-    private int boredom;
+    protected int boredom;
 
     public VirtualPet(String name, String description) {
         this.name = name;
@@ -33,16 +33,10 @@ public abstract class VirtualPet {
         return boredom;
     }
     public void playWithPet(){
-        boredom -= 3;
+        boredom -= 5;
+        happiness += 3;
+        health += 3;
     }
-
-    public void tick1(){
-        boredom ++;
-        happiness ++;
-        health++;
-    }
-
-
 }
 
 

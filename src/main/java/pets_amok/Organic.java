@@ -1,6 +1,6 @@
 package pets_amok;
 
-public abstract class Organic extends VirtualPet {
+public class Organic extends VirtualPet {
 
     public Organic(String name, String description) {
         super(name, description);
@@ -18,10 +18,23 @@ public abstract class Organic extends VirtualPet {
         return thirst;
     }
     public void feedPets(){
-        hunger -= 3;
+        hunger -= 4;
+        happiness += 3;
+        health += 3;
     }
     public void waterPets(){
-        thirst -= 3;
+        thirst -= 4;
+        happiness +=3;
+        health += 3;
+    }
+    // tick method negatively impacts pet attributes which in turn lowers health and happiness
+    // other methods (i.e feedPets) positively impact pet attributes which increases health and happiness
+    public void tick(){
+        hunger ++;
+        thirst ++;
+        boredom ++;
+        happiness --;
+        health --;
     }
 
 }
